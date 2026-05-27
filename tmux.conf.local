@@ -1,7 +1,11 @@
-# split window automatically to 25%
-unbind-key ^T
-bind-key ^T split-window -p 25
+# Use better bind key
+unbind C-s
+set -g prefix C-a
 
-# split window horizontally to 65%
-unbind-key ^Y
-bind-key ^Y split-window -h -p 65
+# Split window automatically to 25%
+unbind-key C-t
+bind-key C-t split-window -l 10
+
+# Split window horizontally to 65%
+unbind-key C-y
+bind-key C-y split-window -h -l 20

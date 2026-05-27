@@ -1,24 +1,34 @@
 # Migrate
-alias migrate='rake db:migrate && rake db:migrate RAILS_ENV=test'
+alias migrate="rake db:migrate db:rollback && rake db:migrate && rake db:migrate db:rollback RAILS_ENV=test && rake db:migrate RAILS_ENV=test"
+alias m="migrate"
 
 # Rspec
-alias s='rspec'
+alias s="rspec"
 
 # Productivity
-alias todo='$EDITOR ~/.todo'
-
-# Fire up redis
-alias start_redis='redis-server /usr/local/etc/redis.conf'
+alias todo="$EDITOR ~/.todo"
 
 # Foreman Start
-alias fs='foreman start'
-
-# Bundle install (installs gems at vendor/ruby)
-alias bi='bundle install --path vendor/bundle'
+alias fs="foreman start"
 
 # Filesystem
 alias ..="cd ../"
 
 # Rails
-alias rs='rails server'
-alias rc='rails console'
+alias rs="rails server"
+alias rc="rails console"
+
+# Docker Compose
+alias dc='docker-compose'
+alias dcup='docker-compose up'
+alias dcdown='docker-compose down'
+alias dce='docker-compose exec'
+
+# Docker Rails
+alias dcw='docker-compose exec web'
+alias dcr='docker-compose exec web rails'
+alias dcc='docker-compose exec web rails console'
+alias dcm='docker-compose exec web rails db:migrate'
+alias dct='docker-compose exec web rails test'
+alias dcb='docker-compose exec web bundle'
+alias dcy='docker-compose exec web yarn'

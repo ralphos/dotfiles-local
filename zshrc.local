@@ -1,27 +1,41 @@
 # recommended by brew doctor
-export PATH='/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin'
+# Prepend system paths rather than replacing the entire PATH
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 
 # Invoke commands without the bin/ prefix
 export PATH="./bin:$PATH"
-# export PATH="$HOME/.rbenv/bin:$PATH"
 
-eval "$(rbenv init -)"
-
-# Pretty print Json
+# Pretty print JSON
 function pjson {
-  if [ $# -gt 0 ];
-    then
-    for arg in $@
-    do
-      if [ -f $arg ];
-        then
-        less $arg | python -m json.tool
+  if [ $# -gt 0 ]; then
+    for arg in $@; do
+      if [ -f $arg ]; then
+        less $arg | python3 -m json.tool
       else
-        echo "$arg" | python -m json.tool
+        echo "$arg" | python3 -m json.tool
       fi
     done
   fi
 }
 
-# prompt
+# Prompt
 export PS1='${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%c%{$reset_color%}$(git_prompt_info) '
+
+# asdf (modern v0.16+ uses shims via PATH, no sourcing needed)
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Postgres 15
+export PATH="/usr/local/opt/postgresql@15/bin:$PATH"
+
+# Windsurf
+export PATH="$HOME/.codeium/windsurf/bin:$PATH"
+
+# Claude Code
+export PATH="$HOME/Library/Application Support/Claude/claude-code/2.1.49:$PATH"
+
+# Local bins
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
