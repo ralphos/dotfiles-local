@@ -21,12 +21,6 @@ function pjson {
 # Prompt
 export PS1='${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%c%{$reset_color%}$(git_prompt_info) '
 
-# asdf (modern v0.16+ uses shims via PATH, no sourcing needed)
-export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
-
-# fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # Postgres 15
 export PATH="/usr/local/opt/postgresql@15/bin:$PATH"
 
@@ -39,3 +33,8 @@ export PATH="$HOME/Library/Application Support/Claude/claude-code/2.1.49:$PATH"
 # Local bins
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
+
+# Re-prepend asdf shims so they win over /usr/bin/ruby and similar.
+# Upstream zshrc puts asdf shims before sourcing this file, but the
+# personal PATH prepends above bury them under system paths.
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
